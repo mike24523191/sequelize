@@ -5,7 +5,7 @@ const router = Router();
 // GEET: /api/user
 
 router.get('/GET',userController.getUser);
-router.get('/FFF', userController.fffUser)
+router.post('/',userController.postUser);
 
 
 export default router;
