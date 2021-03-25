@@ -13,13 +13,13 @@ class UserController {
     const user = await users.findAll({
       attributes: { exclude: ['password'] }
     });
-    const response = _.map(user, o => {
+    const response = _.map(user, (o) => {
       return {
         ...o.dataValues,
         vip: true
       };
     });
-    res.status(200).json({ user });
+    res.status(200).json({ response });
   };
 
   postUser = async (req, res) => {
@@ -29,6 +29,30 @@ class UserController {
       email,
       password
     });
+    res.status(200).json({ user });
+  };
+
+  //DELETE\
+
+  deleteUser = async (req,res) => {
+    const { body } = req;
+    const { email } = body;
+    const user = await users.destroy({
+      where:{
+        email
+      }
+    });
+    res.status(200).json({ user });
+  };
+  updateUser = async(req,res) => {
+    const { body } = req;
+    const { email, password } = body;
+    const user = await users.update({
+      password: password},{
+        where: {
+          email
+        }
+  });
     res.status(200).json({ user });
   };
 }
