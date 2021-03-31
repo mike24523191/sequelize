@@ -1,13 +1,14 @@
 import model from '../models/index'
+import _ from 'lodash';
 
 
-const { user } = model;
+const { users } = model;
 
 class userService {
     getUser = async (email) => {
         const user = await users.findOne({
             where:{
-                email,
+                email:email,
             },
         });
         return user;
